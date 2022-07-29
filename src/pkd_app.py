@@ -41,16 +41,19 @@ def main():
 
     pkd = load_data()
     st.subheader("PKD1/2 Variants")
+    st.write(f"Total variants = {len(pkd)}")
     fig = px.scatter(pkd, x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
     # Plot!
     st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("PKD1 Variants")
+    st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD1'])}")
     pkd1 = px.scatter(pkd[pkd['Gene']=='PKD1'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
     # Plot!
     st.plotly_chart(pkd1, use_container_width=True)
 
     st.subheader("PKD2 Variants")
+    st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD2'])}")
     pkd2 = px.scatter(pkd[pkd['Gene']=='PKD2'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
     # Plot!
     st.plotly_chart(pkd2, use_container_width=True)
