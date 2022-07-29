@@ -32,29 +32,42 @@ def load_data():
     pkd = pkd[pkd['aapos']!=-1].reset_index(drop = True)
     pkd = pkd[['aaref','aaalt','aapos','genename','Ditto_Deleterious','clinvar_clnsig','Interpro_symbol','HGVSp_VEP']]
     pkd.columns = ['aaref','aaalt','aapos','Gene','Ditto score','Clinvar Significance','Interpro symbol','HGVSp_VEP']
-    return pkd
+    class_color = {
+                "Pathogenic": "brown",
+                "Pathogenic/Likely_pathogenic": "red",
+                "Likely_pathogenic": "orange",
+                "Uncertain_significance": "green",
+                "Conflicting_interpretations_of_pathogenicity": "green",
+                "not_provided": "green",
+                "Uncertain_significance,_other": "green",
+                "other": "green",
+                "Likely_benign": "lightblue",
+                "Benign": "blue",
+                "Benign/Likely_benign": "lightblue"}
+    return pkd, class_color
 
 
 def main():
 
     # col1, col2 = st.columns([2, 1])
 
-    pkd = load_data()
+    pkd, class_color = load_data()
     st.subheader("PKD1/2 Variants")
     st.write(f"Total variants = {len(pkd)}")
-    fig = px.scatter(pkd, x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
+    fig = px.scatter(pkd, x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)# marginal_x="histogram", marginal_y="histogram")
     # Plot!
     st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("PKD1 Variants")
     st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD1'])}")
-    pkd1 = px.scatter(pkd[pkd['Gene']=='PKD1'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
+    pkd1 = px.scatter(pkd[pkd['Gene']=='PKD1'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
     # Plot!
     st.plotly_chart(pkd1, use_container_width=True)
 
     st.subheader("PKD2 Variants")
     st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD2'])}")
-    pkd2 = px.scatter(pkd[pkd['Gene']=='PKD2'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','HGVSp_VEP','Interpro symbol'])
+    pkd2 = px.scatter(pkd[pkd['Gene']=='PKD2'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
+             #title="PKD2 Variants")#, symbol="Interpro symbol")
     # Plot!
     st.plotly_chart(pkd2, use_container_width=True)
 
