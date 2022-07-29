@@ -3,6 +3,7 @@ import pandas as pd
 import warnings
 warnings.simplefilter("ignore")
 import plotly.express as px
+import numpy as np
 
 # import re
 
@@ -30,8 +31,10 @@ def load_data():
   subset = ['#chr', 'pos(1-based)',	'ref',	'alt'],
   keep = 'first').reset_index(drop = True)
     pkd = pkd[pkd['aapos']!=-1].reset_index(drop = True)
-    pkd = pkd[['aaref','aaalt','aapos','genename','Ditto_Deleterious','clinvar_clnsig','Interpro_symbol','HGVSp_VEP']]
-    pkd.columns = ['aaref','aaalt','aapos','Gene','Ditto score','Clinvar Significance','Interpro symbol','HGVSp_VEP']
+    #pkd = pkd[['aaref','aaalt','aapos','genename','Ditto_Deleterious','clinvar_clnsig','Interpro_symbol','HGVSp_VEP']]
+    #pkd.columns = ['aaref','aaalt','aapos','Gene','Ditto score','Clinvar Significance','Interpro symbol','HGVSp_VEP']
+    pkd = pkd.replace(np.nan,'N/A')
+    pkd['gnomAD_genomes_AF']= pkd['gnomAD_genomes_AF'].replace('.','N/A')
     class_color = {
                 "Pathogenic": "brown",
                 "Pathogenic/Likely_pathogenic": "red",
@@ -54,19 +57,19 @@ def main():
     pkd, class_color = load_data()
     st.subheader("PKD1/2 Variants")
     st.write(f"Total variants = {len(pkd)}")
-    fig = px.scatter(pkd, x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)# marginal_x="histogram", marginal_y="histogram")
+    fig = px.scatter(pkd, x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)# marginal_x="histogram", marginal_y="histogram")
     # Plot!
     st.plotly_chart(fig, use_container_width=True)
 
     st.subheader("PKD1 Variants")
-    st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD1'])}")
-    pkd1 = px.scatter(pkd[pkd['Gene']=='PKD1'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
+    st.write(f"Total variants = {len(pkd[pkd['genename']=='PKD1'])}")
+    pkd1 = px.scatter(pkd[pkd['genename']=='PKD1'], x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
     # Plot!
     st.plotly_chart(pkd1, use_container_width=True)
 
     st.subheader("PKD2 Variants")
-    st.write(f"Total variants = {len(pkd[pkd['Gene']=='PKD2'])}")
-    pkd2 = px.scatter(pkd[pkd['Gene']=='PKD2'], x="aapos", y="Ditto score", color="Clinvar Significance", hover_data=['Gene','Interpro symbol'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
+    st.write(f"Total variants = {len(pkd[pkd['genename']=='PKD2'])}")
+    pkd2 = px.scatter(pkd[pkd['genename']=='PKD2'], x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
              #title="PKD2 Variants")#, symbol="Interpro symbol")
     # Plot!
     st.plotly_chart(pkd2, use_container_width=True)
