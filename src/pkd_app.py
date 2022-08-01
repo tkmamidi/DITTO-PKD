@@ -27,6 +27,8 @@ st.write(
 @st.cache(allow_output_mutation=True)
 def load_data():
     pkd = pd.read_csv('./data/PKD_Integrated.csv')
+    domain = pd.read_csv('./data/PKD_domains.csv')
+    domain['domain_info'] = domain['domain'] + ' (' + domain['amino acid'] + ')'
     pkd = pkd.drop_duplicates(
   subset = ['#chr', 'pos(1-based)',	'ref',	'alt'],
   keep = 'first').reset_index(drop = True)
@@ -47,32 +49,51 @@ def load_data():
                 "Likely_benign": "lightblue",
                 "Benign": "blue",
                 "Benign/Likely_benign": "lightblue"}
-    return pkd, class_color
+    return pkd, class_color, domain
 
+def domain_count(data, domain):
+    for clinvar_class in list(data['clinvar_clnsig'].unique()):
+        counts = []
+        # Use .iterrows() to iterate over Pandas rows
+        for idx, row in domain.iterrows():
+            #domain.iloc[idx]['Pathogenic'] =
+            counts.append(len(data[(data['aapos']>=row['start']) & (data['aapos']<=row['end']) & (data['clinvar_clnsig']==clinvar_class)]))
+        domain[clinvar_class] = counts
+    return domain
+
+def pkd_plot(st, data,class_color,domain):
+    st.write(f"Total variants = {len(data)}")
+    st.write(f"Total domains = {len(domain)}")
+    pkd1 = px.scatter(data, x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP",  labels={
+                     "aapos": "AA position",
+                     "Ditto_Deleterious": "Ditto Deleterious Score",
+                     "clinvar_clnsig": "Clinvar Significane",
+                 },color_discrete_map=class_color,)
+    # Plot!
+    st.plotly_chart(pkd1, use_container_width=True)
+    stack_bar = px.bar(domain, x="amino acid", y=list(data['clinvar_clnsig'].unique()), hover_name="domain_info", labels={
+                     "amino acid": "AA position per domain",
+                     "clinvar_clnsig": "Clinvar Significane",
+                     "value": "# variants"
+                 },title="Clinvar classifications by domain", color_discrete_map=class_color)
+    st.plotly_chart(stack_bar, use_container_width=True)
+    return None
 
 def main():
 
-    # col1, col2 = st.columns([2, 1])
+    #col1, col2 = st.columns([2, 1])
 
-    pkd, class_color = load_data()
+    pkd, class_color, domains = load_data()
     st.subheader("PKD1/2 Variants")
-    st.write(f"Total variants = {len(pkd)}")
-    fig = px.scatter(pkd, x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)# marginal_x="histogram", marginal_y="histogram")
-    # Plot!
-    st.plotly_chart(fig, use_container_width=True)
-
+    domain = domain_count(pkd, domains)
+    pkd_plot(st,pkd, class_color, domain)
+    #st.write(domains[['Gene symbol','amino acid','domain']])
     st.subheader("PKD1 Variants")
-    st.write(f"Total variants = {len(pkd[pkd['genename']=='PKD1'])}")
-    pkd1 = px.scatter(pkd[pkd['genename']=='PKD1'], x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
-    # Plot!
-    st.plotly_chart(pkd1, use_container_width=True)
-
+    domain = domain_count(pkd[pkd['genename']=='PKD1'], domains[domains['Gene symbol']=='PKD1'])
+    pkd_plot(st,pkd[pkd['genename']=='PKD1'], class_color, domain[domain['Gene symbol']=='PKD1'])
     st.subheader("PKD2 Variants")
-    st.write(f"Total variants = {len(pkd[pkd['genename']=='PKD2'])}")
-    pkd2 = px.scatter(pkd[pkd['genename']=='PKD2'], x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP", color_discrete_map=class_color,)
-             #title="PKD2 Variants")#, symbol="Interpro symbol")
-    # Plot!
-    st.plotly_chart(pkd2, use_container_width=True)
+    domain = domain_count(pkd[pkd['genename']=='PKD2'], domains[domains['Gene symbol']=='PKD2'])
+    pkd_plot(st,pkd[pkd['genename']=='PKD2'], class_color, domain[domain['Gene symbol']=='PKD2'])
 
 
 if __name__ == "__main__":
