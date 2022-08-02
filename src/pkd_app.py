@@ -67,14 +67,15 @@ def pkd_plot(st, data,class_color,domain):
     pkd1 = px.scatter(data, x="aapos", y="Ditto_Deleterious", color="clinvar_clnsig", hover_data=['genename','Interpro_symbol','HGVSc_VEP','CADD_phred','gnomAD_genomes_AF','Defect class','Function'], hover_name="HGVSp_VEP",  labels={
                      "aapos": "AA position",
                      "Ditto_Deleterious": "Ditto Deleterious Score",
-                     "clinvar_clnsig": "Clinvar Significane",
+                     "clinvar_clnsig": "Clinvar Significance",
                  },color_discrete_map=class_color,)
     # Plot!
     st.plotly_chart(pkd1, use_container_width=True)
-    stack_bar = px.bar(domain, x="amino acid", y=list(data['clinvar_clnsig'].unique()), hover_name="domain_info", labels={
-                     "amino acid": "AA position per domain",
-                     "clinvar_clnsig": "Clinvar Significane",
-                     "value": "# variants"
+    stack_bar = px.bar(domain, x="amino acid", y=list(data['clinvar_clnsig'].unique()), hover_name="domain_info", hover_data=['Gene symbol'], labels={
+                     "amino acid": "AA position range per domain",
+                     "clinvar_clnsig": "Clinvar Significance",
+                     "value": "# of variants",
+                     "variable": "Clinvar Significance"
                  },title="Clinvar classifications by domain", color_discrete_map=class_color)
     st.plotly_chart(stack_bar, use_container_width=True)
     return None
