@@ -1,51 +1,50 @@
-﻿Gene symbol,amino acid,start,end,domain,color
-PKD1,24 – 67,24,67,LRRNT,lightblue
-PKD1,68 – 91,68,91,LRR 1,lawngreen
-PKD1,92 – 113,92,113,LRR 2,lemonchiffon
-PKD1,125 – 178,125,178,LRRCT,lightblue
-PKD1,177 – 271,177,271,WSC,lightcoral
-PKD1,272 – 359,272,359,PKD 1,lightcyan
-PKD1,415 – 531,415,531,C-type lectin,lightgoldenrodyellow
-PKD1,638 – 671,638,671,LDL-receptor class A,lawngreen
-PKD1,743 – 817,743,817,PKD 2,lightgrey
-PKD1,855 – 928,855,928,PKD 3,lightgreen
-PKD1,935 – 1020,935,1020,PKD 4,lightpink
-PKD1,1023 – 1129,1023,1129,PKD 5,lightsalmon
-PKD1,1127 – 1215,1127,1215,PKD 6,lightseagreen
-PKD1,1213 – 1298,1213,1298,PKD 7,lightskyblue
-PKD1,1294 – 1383,1294,1383,PKD 8,lawngreen
-PKD1,1382 – 1469,1382,1469,PKD 9,lightslategrey
-PKD1,1468 – 1551,1468,1551,PKD 10,lightsteelblue
-PKD1,1550 – 1635,1550,1635,PKD 11,lightyellow
-PKD1,1634 – 1721,1634,1721,PKD 12,lime
-PKD1,1719 – 1805,1719,1805,PKD 13,limegreen
-PKD1,1807 – 1890,1807,1890,PKD 14,lightblue
-PKD1,1889 – 1974,1889,1974,PKD 15,lawngreen
-PKD1,1977 – 2057,1977,2057,PKD 16,lemonchiffon
-PKD1,2060 – 2148,2060,2148,PKD 17,lightblue
-PKD1,2146 – 2833,2146,2833,REJ,lightcoral
-PKD1,3012 – 3061,3012,3061,GPS,lightcyan
-PKD1,3118 – 3233,3118,3233,PLAT,lightgoldenrodyellow
-PKD1,4220 – 4251,4220,4251,Coiled coil,lawngreen
-PKD2,1 – 219,1,219,Top_domain Cytoplasmic,lightgrey
-PKD2,220 – 241,220,241,Transmembrane Helical;S1,lightgreen
-PKD2,242 – 468,242,468,Top_domain Extracellular,lightpink
-PKD2,331 - 344,331,344,Disulfide bond; Combined sources,lightsalmon
-PKD2,469 – 489,469,489,Transmembrane Helical;S2,lightseagreen
-PKD2,490 – 505,490,505,Top_domain Cytoplasmic,lightskyblue
-PKD2,506 – 526,506,526,Transmembrane Helical;S3,lawngreen
-PKD2,527 – 552,527,552,Top_domain Extracellular,lightslategrey
-PKD2,553 – 573,553,573,Transmembrane HelicalS4,lightsteelblue
-PKD2,574 – 597,574,597,Top_domain Cytoplasmic,lightyellow
-PKD2,598 – 619,598,619,Transmembrane Helical5,lime
-PKD2,620 – 631,620,631,Top_domain Extracellular,limegreen
-PKD2,632 – 646,632,646,Intramembrane Pore-forming,lightblue
-PKD2,641 – 643,641,643,selectivity filter region,lawngreen
-PKD2,647 – 654,647,654,Top_domain Extracellular3,lemonchiffon
-PKD2,655 – 675,655,675,Transmembrane HelicalS6,lightblue
-PKD2,676 – 968,676,968,Top_domain Cytoplasmic3,lightcoral
-PKD2,750 – 785,750,785,EF-hand,lightcyan
-PKD2,763 – 774,763,774,Calcium binding,lightgoldenrodyellow
-PKD2,803 – 822,803,822,Linker,lawngreen
-PKD2,815 – 817,815,817,Mutagenesis; DDD → AAA,lightgrey
-PKD2,833 – 872,833,872,Coiled coil,lightgreen
+﻿Gene symbol,amino acid,start,end,domain,short_domain,color
+PKD1,24 – 67,24,67,LRRNT,LRRNT,lightblue
+PKD1,68 – 91,68,91,LRR 1,LRR 1,lawngreen
+PKD1,92 – 113,92,113,LRR 2,LRR 2,lemonchiffon
+PKD1,125 – 178,125,178,LRRCT,LRRCT,lightblue
+PKD1,177 – 271,177,271,WSC,WSC,lightcoral
+PKD1,272 – 359,272,359,PKD 1,PKD 1,lightcyan
+PKD1,415 – 531,415,531,C-type lectin,lectin-c,lightgoldenrodyellow
+PKD1,638 – 671,638,671,LDL-receptor class A; atypical,LDL-RC-A,lawngreen
+PKD1,743 – 817,743,817,PKD 2,PKD 2,lightgrey
+PKD1,855 – 928,855,928,PKD 3,PKD 3,lightgreen
+PKD1,935 – 1020,935,1020,PKD 4,PKD 4,lightpink
+PKD1,1023 – 1129,1023,1129,PKD 5,PKD 5,lightsalmon
+PKD1,1127 – 1215,1127,1215,PKD 6,PKD 6,lightseagreen
+PKD1,1213 – 1298,1213,1298,PKD 7,PKD 7,lightskyblue
+PKD1,1294 – 1383,1294,1383,PKD 8,PKD 8,lawngreen
+PKD1,1382 – 1469,1382,1469,PKD 9,PKD 9,lightslategrey
+PKD1,1468 – 1551,1468,1551,PKD 10,PKD 10,lightsteelblue
+PKD1,1550 – 1635,1550,1635,PKD 11,PKD 11,lightyellow
+PKD1,1634 – 1721,1634,1721,PKD 12,PKD 12,lime
+PKD1,1719 – 1805,1719,1805,PKD 13,PKD 13,limegreen
+PKD1,1807 – 1890,1807,1890,PKD 14,PKD 14,lightblue
+PKD1,1889 – 1974,1889,1974,PKD 15,PKD 15,lawngreen
+PKD1,1977 – 2057,1977,2057,PKD 16,PKD 16,lemonchiffon
+PKD1,2060 – 2148,2060,2148,PKD 17,PKD 17,lightblue
+PKD1,2146 – 2833,2146,2833,REJ,REJ,lightcoral
+PKD1,3012 – 3061,3012,3061,GPS,GPS,lightcyan
+PKD1,3118 – 3233,3118,3233,PLAT,PLAT,lightgoldenrodyellow
+PKD1,4220 – 4251,4220,4251,Coiled coil,Coiled coil,lawngreen
+PKD2,1 – 219,1,219,Topological domain Cytoplasmic,TDC,lightskyblue
+PKD2,220 – 241,220,241,Transmembrane Helical; Name=S1,TH;S1,lightgreen
+PKD2,242 – 468,242,468,Topological domain Extracellular,TDE,lightpink
+PKD2,331 - 344,331,344,Disulfide bond; Combined sources,SS bond,lightsalmon
+PKD2,469 – 489,469,489,Transmembrane Helical; Name=S2,TH;S2,lightseagreen
+PKD2,490 – 505,490,505,Topological domain Cytoplasmic,TDC,lightskyblue
+PKD2,506 – 526,506,526,Transmembrane Helical; Name=S3,TH;S3,lawngreen
+PKD2,527 – 552,527,552,Topological domain Extracellular,TDE,lightslategrey
+PKD2,553 – 573,553,573,Transmembrane Helical; Name=S4,TH;S4,lightsteelblue
+PKD2,574 – 597,574,597,Topological domain Cytoplasmic,TDC,lightyellow
+PKD2,598 – 619,598,619,Transmembrane Helical; Name=5,TH;5,lime
+PKD2,620 – 631,620,631,Topological domain Extracellular,TDE,limegreen
+PKD2,632 – 646,632,646,Intramembrane Pore-forming,IPF,lightblue
+PKD2,641 – 643,641,643,selectivity filter region,SFR,lawngreen
+PKD2,647 – 654,647,654,Topological domain Extracellular3 ,TDE3 ,lemonchiffon
+PKD2,655 – 675,655,675,Transmembrane Helical; Name=S6,TH;S6,lightblue
+PKD2,676 – 968,676,968,Topological domain Cytoplasmic3 ,TDC3 ,lightcoral
+PKD2,750 – 785,750,785,EF-hand,EF-hand,lightcyan
+PKD2,763 – 774,763,774,Calcium binding,CB,lightgoldenrodyellow
+PKD2,803 – 822,803,822,Linker,Linker,lawngreen
+PKD2,833 – 872,833,872,Coiled coil,Coiled coil,lightgrey

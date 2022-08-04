@@ -100,18 +100,19 @@ def pkd_plot(st, data, class_color, domain):
     )
     pkd1.add_hline(y=0.91, line_width=2, line_dash="dash", line_color="red")
 
-    for idx, row in domain.iterrows():
-        pkd1.add_vrect(
-            x0=row["start"],
-            x1=row["end"],
-            line_width=0,
-            opacity=0.2,
-            fillcolor=row["color"],
-            annotation_text=row["domain"],
-            annotation_position="outside top",
-            annotation_textangle=45,
-            # annotation=dict(font_size=10, font_family="Times New Roman"),
-        )
+    if len(domain['Gene symbol'].unique()) == 1:
+        for idx, row in domain.iterrows():
+            pkd1.add_vrect(
+                x0=row["start"],
+                x1=row["end"],
+                line_width=0,
+                opacity=0.2,
+                fillcolor=row["color"],
+                annotation_text=row["short_domain"],
+                annotation_position="outside top",
+                annotation_textangle=45,
+                # annotation=dict(font_size=10, font_family="Times New Roman"),
+            )
 
     # Plot!
     st.plotly_chart(pkd1, use_container_width=True)
